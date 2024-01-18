@@ -1,6 +1,7 @@
 package com.example.secondapp
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.AdapterView
@@ -14,8 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import model_kotlin.ModelView
 
 class PersonsActivity : AppCompatActivity() {
-
-    val a = "23"
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +33,6 @@ class PersonsActivity : AppCompatActivity() {
 
         val persons = ModelView().getAllUsers()
         val personsList: RecyclerView = findViewById(R.id.personsList)
-
         personsList.layoutManager = LinearLayoutManager(this)
         personsList.adapter = PersonsAdapter(persons, this)
 
@@ -51,9 +49,14 @@ class PersonsActivity : AppCompatActivity() {
                 sortedOption.text = "Нет"
                 personsList.adapter = PersonsAdapter(ModelView().getAllUsers(), this)
             }
-
         }
 
+
+        val buttonAddPerson = findViewById<Button>(R.id.buttonAddPerson)
+        buttonAddPerson.setOnClickListener {
+            val intent = Intent(this, AddPersonActivity::class.java)
+            startActivity(intent)
+        }
 
 
 

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#B58910"
+    tools:context=".AddPersonActivity">
+
+
+    <EditText
+        android:id="@+id/addUser_name"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:ems="10"
+        android:hint="Имя"
+        android:inputType="text" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:background="#9A7614"
+        android:scrollbarSize="30sp"
+        android:layout_height="48dp"
+        android:layout_marginVertical="20dp"
+        />
+
+    <Button
+        android:id="@+id/addUser_addButton"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#0F5B6E"
+        android:layout_width="200dp"
+        android:text="Добавть" />
+
+    <Button
+        android:id="@+id/addUser_backButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#475153"
+        android:text="Назад" />
+
+<!--    <Spinner-->
+<!--        android:id="@+id/spinner2"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content" />-->
+
+
+</LinearLayout>
