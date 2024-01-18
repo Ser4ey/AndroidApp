@@ -9,6 +9,9 @@ import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import model_kotlin.ModelView
 
 class PersonsActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -27,11 +30,15 @@ class PersonsActivity : AppCompatActivity() {
 //        spinner.selectedItem.toString()
 
         val sortedOption = findViewById<Button>(R.id.sortButton)
-
         sortedOption.setOnClickListener {
             sortedOption.text = sortedOption.text.toString() + "1"
         }
 
+
+        val users = ModelView().getAllUsers()
+        val usersList: RecyclerView = findViewById(R.id.personsList)
+        usersList.layoutManager = LinearLayoutManager(this)
+        usersList.adapter = PersonsAdapter(users, this)
 
 
 

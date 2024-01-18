@@ -5,8 +5,9 @@ class ModelView {
 //        актуальный список всех пользователей
         val user1 = User(1, "Oka1", user_sex(1, "М"), user_group(1, "White"), user_city(1, "Москва"))
         val user2 = User(2, "Pols2", user_sex(1, "Ж"), user_group(1, "Red"), user_city(1, "Питер"))
+        val user3 = User(3, "Pols21", user_sex(1, "Ж"), user_group(1, "Red"), user_city(1, "Питер"))
 
-        return listOf(user1, user2)
+        return listOf(user1, user2, user3, user2, user3, user2, user3, user2, user3, user2, user3, user2, user3, user2, user3)
     }
 
     fun getAllSortedUsers(reverse: Boolean = false): List<User> {
