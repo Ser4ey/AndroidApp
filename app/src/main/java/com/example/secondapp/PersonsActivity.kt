@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 import model_kotlin.ModelView
 
 class PersonsActivity : AppCompatActivity() {
+
+    val a = "23"
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,16 +32,27 @@ class PersonsActivity : AppCompatActivity() {
 //
 //        spinner.selectedItem.toString()
 
+        val persons = ModelView().getAllUsers()
+        val personsList: RecyclerView = findViewById(R.id.personsList)
+
+        personsList.layoutManager = LinearLayoutManager(this)
+        personsList.adapter = PersonsAdapter(persons, this)
+
+
         val sortedOption = findViewById<Button>(R.id.sortButton)
         sortedOption.setOnClickListener {
-            sortedOption.text = sortedOption.text.toString() + "1"
+            if (sortedOption.text.toString() == "Нет") {
+                sortedOption.text = "A -> Я"
+                personsList.adapter = PersonsAdapter(ModelView().getAllSortedUsers(true), this)
+            } else if (sortedOption.text.toString() == "A -> Я") {
+                sortedOption.text = "Я -> A"
+                personsList.adapter = PersonsAdapter(ModelView().getAllSortedUsers(false), this)
+            } else {
+                sortedOption.text = "Нет"
+                personsList.adapter = PersonsAdapter(ModelView().getAllUsers(), this)
+            }
+
         }
-
-
-        val users = ModelView().getAllUsers()
-        val usersList: RecyclerView = findViewById(R.id.personsList)
-        usersList.layoutManager = LinearLayoutManager(this)
-        usersList.adapter = PersonsAdapter(users, this)
 
 
 
