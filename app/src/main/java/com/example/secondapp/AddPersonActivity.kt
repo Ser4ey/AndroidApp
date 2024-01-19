@@ -58,11 +58,18 @@ class AddPersonActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val number_of_users = ModelView().getAllUsers().size+1
-            val user = User(number_of_users, userName.text.toString().trim()
-                , user_sex(1, "М"),
-                user_group(1, "Белые"),
-                user_city(1, "Москва"))
+            val userData_userId = ModelView().getAllUsers().size+1
+            val userData_userName = userName.text.toString().trim()
+            val userData_userSex = userSexSpinner.selectedItem.toString()
+            val userData_userGroup = userGroupSpinner.selectedItem.toString()
+            val userData_userCity = userCitySpinner.selectedItem.toString()
+
+
+            val user = User(userData_userId, userData_userName,
+                ModelView().getSexByName(userData_userSex),
+                ModelView().getGroupByName(userData_userGroup),
+                ModelView().getCityByName(userData_userCity))
+
             ModelView().addUser(user)
 
             Toast.makeText(this, "Пользователь ${user.name} успешно добавлен",

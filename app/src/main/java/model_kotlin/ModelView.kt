@@ -55,6 +55,7 @@ class ModelView {
     }
 
     fun addUser(user: User) {
+//        user.id - по умолчанию 0, должен задаваться автоматически в бд
         users.add(user)
     }
 
@@ -79,6 +80,11 @@ class ModelView {
         return user_group(2, "Белые")
     }
 
+    fun getGroupByName(name: String): user_group {
+        if (name == "Красные") return user_group(1, "Красные")
+        return user_group(2, "Белые")
+    }
+
     fun getAllCities(): List<user_city> {
         return listOf(user_city(1, "Москва"),  user_city(2, "Питер"))
     }
@@ -88,12 +94,22 @@ class ModelView {
         return user_city(2, "Питер")
     }
 
+    fun getCityByName(name: String): user_city {
+        if (name == "Москва") return user_city(1, "Москва")
+        return user_city(2, "Питер")
+    }
+
     fun getAllSex(): List<user_sex> {
         return listOf(user_sex(1, "М"),  user_sex(2, "Ж"))
     }
 
     fun getSexById(id: Int): user_sex {
         if (id == 1) return user_sex(1, "М")
+        return user_sex(2, "Ж")
+    }
+
+    fun getSexByName(name: String): user_sex {
+        if (name == "М") return user_sex(1, "М")
         return user_sex(2, "Ж")
     }
 }
