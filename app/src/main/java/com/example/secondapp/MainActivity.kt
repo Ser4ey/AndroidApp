@@ -21,26 +21,5 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-//        button.setOnClickListener {
-//            val login = userLogin.text.toString().trim()
-//            val email = userEmail.text.toString().trim()
-//            val pass = userPass.text.toString().trim()
-//
-//            if (login == "" || email == "" || pass == "")
-//                Toast.makeText(this, "Не все поля заполнены!", Toast.LENGTH_LONG).show()
-//            else {
-//                val user1 = User1(login, email, pass)
-//
-//                val db = DbHelper(this, null)
-//                db.addUser(user1)
-//                Toast.makeText(this, "Пользователь $login добавлен", Toast.LENGTH_LONG).show()
-//
-//                userLogin.text.clear()
-//                userEmail.text.clear()
-//                userPass.text.clear()
-//            }
-//        }
-
-
     }
 }

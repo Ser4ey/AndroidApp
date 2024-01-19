@@ -24,6 +24,11 @@ class ModelView {
         //        актуальный список всех пользователей, котрые удовлетворяют всем 3 фильтрам
         val filteredUsers = mutableListOf<User>()
 
+        println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+        println(byCity)
+        println(byGroup)
+        println(bySex)
+
         for (user in users){
             if (user.city in byCity && user.group in byGroup && user.sex in bySex)
                 filteredUsers.add(user)
