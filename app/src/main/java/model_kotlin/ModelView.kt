@@ -58,6 +58,7 @@ class ModelView {
                 users[i].name = newUserData.name
                 users[i].sex = newUserData.sex
                 users[i].group = newUserData.group
+                users[i].city = newUserData.city
                 return true
             }
         }
