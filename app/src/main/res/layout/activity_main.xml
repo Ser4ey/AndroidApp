@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,15 +13,17 @@
         android:id="@+id/button_login"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:text="Войти"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:textColor="#5e4602"
         android:layout_gravity="center"
         android:backgroundTint="#e2a600"
-        android:layout_marginTop="200dp"
-        />
+        android:text="Войти"
+        android:textColor="#5e4602"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

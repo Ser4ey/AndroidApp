@@ -29,7 +29,7 @@
 
         <TextView
             android:id="@+id/item_list_sex"
-            android:layout_weight="1"
+            android:layout_weight="1.13"
             android:paddingHorizontal="10dp"
             android:paddingVertical="5dp"
             android:textSize="16sp"
@@ -48,7 +48,7 @@
 
         <TextView
             android:id="@+id/item_list_city"
-            android:layout_weight="1"
+            android:layout_weight="0.94"
             android:paddingHorizontal="10dp"
             android:paddingVertical="5dp"
             android:textSize="16sp"
@@ -62,6 +62,7 @@
         android:id="@+id/item_list_button1234"
         android:layout_width="150dp"
         android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="5dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#0F5B6E"
         android:text="Изменить" />

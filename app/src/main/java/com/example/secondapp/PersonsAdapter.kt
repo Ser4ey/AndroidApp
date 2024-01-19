@@ -1,5 +1,6 @@
 package com.example.secondapp
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -29,11 +30,12 @@ class PersonsAdapter(var items: List<User>, var context: Context) : RecyclerView
         return items.count()
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.name.text = items[position].name
-        holder.sex.text = items[position].sex.value
-        holder.group.text = items[position].group.name
-        holder.city.text = items[position].city.name
+        holder.sex.text = "Пол: ${items[position].sex.value}"
+        holder.group.text = "Группа: ${items[position].group.name}"
+        holder.city.text = "Город: ${items[position].city.name}"
     }
 
 }
