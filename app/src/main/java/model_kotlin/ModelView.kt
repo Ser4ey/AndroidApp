@@ -12,22 +12,9 @@ class ModelView {
         return users
     }
 
-    fun getAllSortedUsers(reverse: Boolean = false): List<User> {
-//        актуальный отсортированный список всех пользователей
-        if (reverse)
-            return users.sortedBy { U -> U.name }
-        else
-            return users.sortedBy { U -> U.name }.reversed()
-    }
-
     fun filterUser(byCity: List<user_city>, byGroup: List<user_group>, bySex: List<user_sex>): List<User>  {
         //        актуальный список всех пользователей, котрые удовлетворяют всем 3 фильтрам
         val filteredUsers = mutableListOf<User>()
-
-        println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-        println(byCity)
-        println(byGroup)
-        println(bySex)
 
         for (user in users){
             if (user.city in byCity && user.group in byGroup && user.sex in bySex)
@@ -35,13 +22,6 @@ class ModelView {
         }
 
         return filteredUsers
-    }
-
-    fun getUserBuId(userId: Int): User {
-        for (user in users) {
-            if (user.id == userId) return user
-        }
-        return user1
     }
 
     fun delUser(userId: Int): Boolean {
@@ -78,11 +58,6 @@ class ModelView {
         return listOf(user_group(1, "Красные"),  user_group(2, "Белые"))
     }
 
-    fun getGroupById(id: Int): user_group {
-        if (id == 1) return user_group(1, "Красные")
-        return user_group(2, "Белые")
-    }
-
     fun getGroupByName(name: String): user_group {
         if (name == "Красные") return user_group(1, "Красные")
         return user_group(2, "Белые")
@@ -92,11 +67,6 @@ class ModelView {
         return listOf(user_city(1, "Москва"),  user_city(2, "Питер"))
     }
 
-    fun getCityById(id: Int): user_city {
-        if (id == 1) return user_city(1, "Москва")
-        return user_city(2, "Питер")
-    }
-
     fun getCityByName(name: String): user_city {
         if (name == "Москва") return user_city(1, "Москва")
         return user_city(2, "Питер")
@@ -104,11 +74,6 @@ class ModelView {
 
     fun getAllSex(): List<user_sex> {
         return listOf(user_sex(1, "М"),  user_sex(2, "Ж"))
-    }
-
-    fun getSexById(id: Int): user_sex {
-        if (id == 1) return user_sex(1, "М")
-        return user_sex(2, "Ж")
     }
 
     fun getSexByName(name: String): user_sex {
