@@ -2,7 +2,7 @@ package model_kotlin
 
 val user1 = User(1, "Райан Гослинг", user_sex(1, "М"), user_group(2, "Белые"), user_city(1, "Москва"))
 val user2 = User(2, "Аня", user_sex(2, "Ж"), user_group(1, "Красные"), user_city(2, "Питер"))
-val user3 = User(3, "Ива", user_sex(2, "Ж"), user_group(1, "Красные"), user_city(2, "Питер"))
+val user3 = User(3, "Ива", user_sex(2, "Ж"), user_group(1, "Красные"), user_city(1, "Москва"))
 val users = mutableListOf<User>(user1, user2, user3)
 var current_id = 4
 
@@ -22,10 +22,14 @@ class ModelView {
 
     fun filterUser(byCity: List<user_city>, byGroup: List<user_group>, bySex: List<user_sex>): List<User>  {
         //        актуальный список всех пользователей, котрые удовлетворяют всем 3 фильтрам
-        val user1 = User(1, "Oka1", user_sex(1, "М"), user_group(1, "White"), user_city(1, "Москва"))
-        val user2 = User(2, "Pols2", user_sex(1, "Ж"), user_group(1, "Red"), user_city(1, "Питер"))
+        val filteredUsers = mutableListOf<User>()
 
-        return listOf(user1, user2)
+        for (user in users){
+            if (user.city in byCity && user.group in byGroup && user.sex in bySex)
+                filteredUsers.add(user)
+        }
+
+        return filteredUsers
     }
 
     fun getUserBuId(userId: Int): User {

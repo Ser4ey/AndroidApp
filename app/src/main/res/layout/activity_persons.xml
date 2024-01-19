@@ -70,7 +70,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6">
 
         <CheckBox
-            android:id="@+id/checkBox1"
+            android:id="@+id/filterCheckBoxSex1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
@@ -79,16 +79,16 @@
             android:text="М" />
 
         <CheckBox
-            android:id="@+id/checkBox2"
+            android:id="@+id/filterCheckBoxGroup1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
             android:layout_weight="1"
             android:checked="true"
-            android:text="Белые" />
+            android:text="Красные" />
 
         <CheckBox
-            android:id="@+id/checkBox3"
+            android:id="@+id/filterCheckBoxCity1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
@@ -108,7 +108,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <CheckBox
-            android:id="@+id/checkBox4"
+            android:id="@+id/filterCheckBoxSex2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
@@ -117,16 +117,16 @@
             android:text="Ж" />
 
         <CheckBox
-            android:id="@+id/checkBox5"
+            android:id="@+id/filterCheckBoxGroup2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
             android:layout_weight="1"
             android:checked="true"
-            android:text="Красные" />
+            android:text="Белые" />
 
         <CheckBox
-            android:id="@+id/checkBox6"
+            android:id="@+id/filterCheckBoxCity2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"

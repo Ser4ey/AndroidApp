@@ -64,7 +64,6 @@ class AddPersonActivity : AppCompatActivity() {
             val userData_userGroup = userGroupSpinner.selectedItem.toString()
             val userData_userCity = userCitySpinner.selectedItem.toString()
 
-
             val user = User(userData_userId, userData_userName,
                 ModelView().getSexByName(userData_userSex),
                 ModelView().getGroupByName(userData_userGroup),
@@ -78,19 +77,6 @@ class AddPersonActivity : AppCompatActivity() {
             val intent = Intent(this, PersonsActivity::class.java)
             startActivity(intent)
         }
-
-
-//        val list_of_items = arrayOf("Item 1", "Item 2", "Item 3")
-//
-//        val spinner = findViewById<Spinner>(R.id.addUser_spinnerUserGroup)
-//        val spinner2 = findViewById<Spinner>(R.id.addUser_spinnerUserSex)
-//
-//        val aa = ArrayAdapter(this, android.R.layout.simple_spinner_item, list_of_items)
-//        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//        spinner.adapter = aa
-//        spinner2.adapter = aa
-
-//        spinner.selectedItem.toString()
 
     }
 }

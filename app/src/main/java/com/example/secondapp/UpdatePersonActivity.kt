@@ -90,13 +90,10 @@ class UpdatePersonActivity : AppCompatActivity() {
             val userData_userGroup = userGroupSpinner.selectedItem.toString()
             val userData_userCity = userCitySpinner.selectedItem.toString()
 
-            println("ASSS111111111111: ${userData_userCity}")
-
             val user = User(intentUserId, userData_userName,
                 ModelView().getSexByName(userData_userSex),
                 ModelView().getGroupByName(userData_userGroup),
                 ModelView().getCityByName(userData_userCity))
-            println("ASSS111111111111: ${user}")
 
             ModelView().updateUser(user)
 

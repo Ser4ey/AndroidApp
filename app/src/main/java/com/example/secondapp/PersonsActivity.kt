@@ -13,41 +13,32 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import model_kotlin.ModelView
+import model_kotlin.users
 
 class PersonsActivity : AppCompatActivity() {
+    var currentPersons = ModelView().getAllUsers()
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_persons)
+        this.currentPersons = ModelView().getAllUsers()
 
-//        val list_of_items = arrayOf("Item 1", "Item 2", "Item 3")
-//
-//        val spinner = findViewById<Spinner>(R.id.spinner)
-//
-//        val aa = ArrayAdapter(this, android.R.layout.simple_spinner_item, list_of_items)
-//        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//        spinner.adapter = aa
-//
-//        spinner.selectedItem.toString()
-
-        val persons = ModelView().getAllUsers()
         val personsList: RecyclerView = findViewById(R.id.personsList)
         personsList.layoutManager = LinearLayoutManager(this)
-        personsList.adapter = PersonsAdapter(persons, this)
-
+        personsList.adapter = PersonsAdapter(this.currentPersons, this)
 
         val sortedOption = findViewById<Button>(R.id.sortButton)
         sortedOption.setOnClickListener {
             if (sortedOption.text.toString() == "Нет") {
                 sortedOption.text = "A -> Я"
-                personsList.adapter = PersonsAdapter(ModelView().getAllSortedUsers(true), this)
+                personsList.adapter = PersonsAdapter(this.currentPersons.sortedBy{U -> U.name}, this)
             } else if (sortedOption.text.toString() == "A -> Я") {
                 sortedOption.text = "Я -> A"
-                personsList.adapter = PersonsAdapter(ModelView().getAllSortedUsers(false), this)
+                personsList.adapter = PersonsAdapter(this.currentPersons.sortedBy{U -> U.name}.reversed(), this)
             } else {
                 sortedOption.text = "Нет"
-                personsList.adapter = PersonsAdapter(ModelView().getAllUsers(), this)
+                personsList.adapter = PersonsAdapter(this.currentPersons, this)
             }
         }
 
@@ -57,6 +48,8 @@ class PersonsActivity : AppCompatActivity() {
             val intent = Intent(this, AddPersonActivity::class.java)
             startActivity(intent)
         }
+
+
 
 
 
