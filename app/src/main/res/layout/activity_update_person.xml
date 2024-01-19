@@ -8,29 +8,28 @@
     android:background="#B58910"
     android:paddingHorizontal="20dp"
     android:paddingVertical="40dp"
-    tools:context=".AddPersonActivity">
+    tools:context=".UpdatePersonActivity">
 
+
+    <TextView
+        android:id="@+id/updateUser_userId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:textSize="26sp"
+        android:text="id: 9" />
 
     <EditText
-        android:id="@+id/addUser_name"
+        android:id="@+id/updateUser_name"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:textSize="20sp"
-        android:hint="Имя"
+        android:text="Райан Гослинг"
         android:layout_marginBottom="20dp"
         android:inputType="text" />
 
     <Spinner
-        android:id="@+id/addUser_spinnerUserSex"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="#F4EACC"
-        android:layout_marginBottom="20dp"
-        android:popupBackground="#F4EACC"
-         />
-
-    <Spinner
-        android:id="@+id/addUser_spinnerUserGroup"
+        android:id="@+id/updateUser_spinnerUserSex"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="#F4EACC"
@@ -39,7 +38,16 @@
         />
 
     <Spinner
-        android:id="@+id/addUser_spinnerUserCity"
+        android:id="@+id/updateUser_spinnerUserGroup"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#F4EACC"
+        android:layout_marginBottom="20dp"
+        android:popupBackground="#F4EACC"
+        />
+
+    <Spinner
+        android:id="@+id/updateUser_spinnerUserCity"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="#F4EACC"
@@ -48,15 +56,15 @@
         />
 
     <Button
-        android:id="@+id/addUser_addButton"
+        android:id="@+id/updateUser_updateButton"
         android:layout_height="wrap_content"
         android:backgroundTint="#0F5B6E"
         android:layout_width="200dp"
         android:layout_marginBottom="20dp"
-        android:text="Добавть" />
+        android:text="Изменить" />
 
     <Button
-        android:id="@+id/addUser_backButton"
+        android:id="@+id/updateUser_backButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#475153"

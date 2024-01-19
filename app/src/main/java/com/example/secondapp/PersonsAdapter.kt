@@ -19,6 +19,7 @@ class PersonsAdapter(var items: List<User>, var context: Context) : RecyclerView
         val sex: TextView = view.findViewById(R.id.item_list_sex)
         val group: TextView = view.findViewById(R.id.item_list_group)
         val city: TextView = view.findViewById(R.id.item_list_city)
+        val updateUserBtn: Button = view.findViewById(R.id.item_list_updateUserBtn)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -36,6 +37,21 @@ class PersonsAdapter(var items: List<User>, var context: Context) : RecyclerView
         holder.sex.text = "Пол: ${items[position].sex.value}"
         holder.group.text = "Группа: ${items[position].group.name}"
         holder.city.text = "Город: ${items[position].city.name}"
+
+
+        holder.updateUserBtn.setOnClickListener {
+            val intent = Intent(context, UpdatePersonActivity::class.java)
+
+            intent.putExtra("userId", items[position].id)
+            intent.putExtra("userName", items[position].name)
+            intent.putExtra("userSex", items[position].sex.value)
+            intent.putExtra("userSexId", items[position].sex.id)
+            intent.putExtra("userGroup", items[position].group.name)
+            intent.putExtra("userGroupId", items[position].group.id)
+            intent.putExtra("userCity", items[position].city.name)
+            intent.putExtra("userCityId", items[position].city.id)
+            context.startActivity(intent)
+        }
     }
 
 }

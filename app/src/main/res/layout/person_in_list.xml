@@ -29,7 +29,7 @@
 
         <TextView
             android:id="@+id/item_list_sex"
-            android:layout_weight="1.13"
+            android:layout_weight="1.2"
             android:paddingHorizontal="10dp"
             android:paddingVertical="5dp"
             android:textSize="16sp"
@@ -59,7 +59,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/item_list_button1234"
+        android:id="@+id/item_list_updateUserBtn"
         android:layout_width="150dp"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="5dp"

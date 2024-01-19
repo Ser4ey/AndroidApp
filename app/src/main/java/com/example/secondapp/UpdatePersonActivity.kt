@@ -1,22 +1,28 @@
 package com.example.secondapp
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import model_kotlin.ModelView
 import model_kotlin.User
-import model_kotlin.user_city
-import model_kotlin.user_group
-import model_kotlin.user_sex
 
-class AddPersonActivity : AppCompatActivity() {
-    fun initSpinner(userSexSpinner: Spinner, userGroupSpinner: Spinner, userCitySpinner: Spinner) {
+class UpdatePersonActivity : AppCompatActivity() {
+    private fun selectSpinnerValue(spinner: Spinner, value: String) {
+        for (i in 0 until spinner.count) {
+            if (spinner.getItemAtPosition(i) == value) {
+                spinner.setSelection(i)
+                break
+            }
+        }
+    }
+    fun initSpinner(userSexSpinner: Spinner, userGroupSpinner: Spinner, userCitySpinner: Spinner,
+                    spinnerSexValue: String, spinnerGroupValue: String, spinnerCityValue: String) {
         val sex_list = ModelView().getAllSex().map { it.value }
         val groups_list = ModelView().getAllGroups().map { it.name }
         val cities_list = ModelView().getAllCities().map { it.name }
@@ -24,41 +30,63 @@ class AddPersonActivity : AppCompatActivity() {
         val sex_adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, sex_list)
         sex_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         userSexSpinner.adapter = sex_adapter
+        selectSpinnerValue(userSexSpinner, spinnerSexValue)
 
         val groups_adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, groups_list)
         groups_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         userGroupSpinner.adapter = groups_adapter
+        selectSpinnerValue(userGroupSpinner, spinnerGroupValue)
 
         val cities_adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, cities_list)
         cities_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         userCitySpinner.adapter = cities_adapter
+        selectSpinnerValue(userCitySpinner, spinnerCityValue)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_person)
+        setContentView(R.layout.activity_update_person)
 
-        val userName: EditText = findViewById(R.id.addUser_name)
-        val userSexSpinner: Spinner = findViewById(R.id.addUser_spinnerUserSex)
-        val userGroupSpinner: Spinner = findViewById(R.id.addUser_spinnerUserGroup)
-        val userCitySpinner: Spinner = findViewById(R.id.addUser_spinnerUserCity)
-        this.initSpinner(userSexSpinner, userGroupSpinner, userCitySpinner)
+        val intentUserId = intent.getIntExtra("userId", 0)
+        val intentUserName = intent.getStringExtra("userName").toString()
+        val intentUserSex = intent.getStringExtra("userSex").toString()
+        val intentUserSexId = intent.getIntExtra("userSexId", 1)
+        val intentUserGroup = intent.getStringExtra("userGroup").toString()
+        val intentUserGroupId = intent.getIntExtra("userGroupId", 1)
+        val intentUserCity = intent.getStringExtra("userCity").toString()
+        val intentUserCityId = intent.getIntExtra("userCityId", 1)
 
-        val addButton: Button = findViewById(R.id.addUser_addButton)
-        val backButton: Button = findViewById(R.id.addUser_backButton)
+        println("AAAAAAAAAAAAAAAAAAAAaa0  ${intent.extras}")
+        println("AAAAAAAAAAAAAAAAAAAAaa1  ${intentUserSexId}")
+        println("AAAAAAAAAAAAAAAAAAAAaa2  ${intentUserGroupId}")
+        println("AAAAAAAAAAAAAAAAAAAAaa3  ${intentUserCityId}")
+
+        val userId: TextView = findViewById(R.id.updateUser_userId)
+        userId.text = intentUserId.toString()
+
+        val userName: EditText = findViewById(R.id.updateUser_name)
+        userName.setText(intentUserName)
+
+        val userSexSpinner: Spinner = findViewById(R.id.updateUser_spinnerUserSex)
+        val userGroupSpinner: Spinner = findViewById(R.id.updateUser_spinnerUserGroup)
+        val userCitySpinner: Spinner = findViewById(R.id.updateUser_spinnerUserCity)
+        this.initSpinner(userSexSpinner, userGroupSpinner, userCitySpinner, intentUserSex, intentUserGroup, intentUserCity)
+
+        val updateButton: Button = findViewById(R.id.updateUser_updateButton)
+        val backButton: Button = findViewById(R.id.updateUser_backButton)
 
         backButton.setOnClickListener {
             val intent = Intent(this, PersonsActivity::class.java)
             startActivity(intent)
         }
 
-        addButton.setOnClickListener {
+        updateButton.setOnClickListener {
             if (userName.text.toString().trim().isEmpty()) {
                 Toast.makeText(this, "Не все поля заполнены!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            val userData_userId = 0
+            val userData_userId = ModelView().getAllUsers().size+1
             val userData_userName = userName.text.toString().trim()
             val userData_userSex = userSexSpinner.selectedItem.toString()
             val userData_userGroup = userGroupSpinner.selectedItem.toString()
@@ -78,19 +106,6 @@ class AddPersonActivity : AppCompatActivity() {
             val intent = Intent(this, PersonsActivity::class.java)
             startActivity(intent)
         }
-
-
-//        val list_of_items = arrayOf("Item 1", "Item 2", "Item 3")
-//
-//        val spinner = findViewById<Spinner>(R.id.addUser_spinnerUserGroup)
-//        val spinner2 = findViewById<Spinner>(R.id.addUser_spinnerUserSex)
-//
-//        val aa = ArrayAdapter(this, android.R.layout.simple_spinner_item, list_of_items)
-//        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//        spinner.adapter = aa
-//        spinner2.adapter = aa
-
-//        spinner.selectedItem.toString()
-
+        
     }
 }

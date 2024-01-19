@@ -1,26 +1,19 @@
 package model_kotlin
 
-val user1 = User(1, "Аня", user_sex(1, "М"), user_group(1, "White"), user_city(1, "Москва"))
-val user2 = User(2, "Яблоко", user_sex(1, "Ж"), user_group(1, "Red"), user_city(1, "Питер"))
-val user3 = User(3, "Ива", user_sex(1, "Ж"), user_group(1, "Red"), user_city(1, "Питер"))
+val user1 = User(1, "Райан Гослинг", user_sex(1, "М"), user_group(2, "Белые"), user_city(1, "Москва"))
+val user2 = User(2, "Аня", user_sex(2, "Ж"), user_group(1, "Красные"), user_city(2, "Питер"))
+val user3 = User(3, "Ива", user_sex(2, "Ж"), user_group(1, "Красные"), user_city(2, "Питер"))
 val users = mutableListOf<User>(user1, user2, user3)
+var current_id = 4
 
 class ModelView {
 
     fun getAllUsers(): List<User> {
-//        актуальный список всех пользователей
-//        val user1 = User(1, "Oka1", user_sex(1, "М"), user_group(1, "White"), user_city(1, "Москва"))
-//        val user2 = User(2, "Pols2", user_sex(1, "Ж"), user_group(1, "Red"), user_city(1, "Питер"))
-//        val user3 = User(3, "Pols21", user_sex(1, "Ж"), user_group(1, "Red"), user_city(1, "Питер"))
-
         return users
     }
 
     fun getAllSortedUsers(reverse: Boolean = false): List<User> {
 //        актуальный отсортированный список всех пользователей
-        val user1 = User(1, "Oka1", user_sex(1, "М"), user_group(1, "White"), user_city(1, "Москва"))
-        val user2 = User(2, "Pols2", user_sex(1, "Ж"), user_group(1, "Red"), user_city(1, "Питер"))
-
         if (reverse)
             return users.sortedBy { U -> U.name }
         else
@@ -36,8 +29,6 @@ class ModelView {
     }
 
     fun getUserBuId(userId: Int): User {
-//        val user1 = User(1, "Oka1", user_sex(1, "М"), user_group(1, "White"), user_city(1, "Москва"))
-//        return user1
         for (user in users) {
             if (user.id == userId) return user
         }
@@ -56,7 +47,9 @@ class ModelView {
 
     fun addUser(user: User) {
 //        user.id - по умолчанию 0, должен задаваться автоматически в бд
-        users.add(user)
+        val new_user = User(current_id, user.name, user.sex,  user.group, user.city)
+        current_id += 1
+        users.add(new_user)
     }
 
     fun updateUser(newUserData: User): Boolean {
