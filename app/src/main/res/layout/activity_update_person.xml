@@ -64,6 +64,14 @@
         android:text="Изменить" />
 
     <Button
+        android:id="@+id/updateUser_deleteButton"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#C13306"
+        android:layout_width="200dp"
+        android:layout_marginBottom="20dp"
+        android:text="Удалить" />
+
+    <Button
         android:id="@+id/updateUser_backButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"

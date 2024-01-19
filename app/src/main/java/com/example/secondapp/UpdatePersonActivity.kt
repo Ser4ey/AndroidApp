@@ -1,5 +1,6 @@
 package com.example.secondapp
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -43,6 +44,7 @@ class UpdatePersonActivity : AppCompatActivity() {
         selectSpinnerValue(userCitySpinner, spinnerCityValue)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_update_person)
@@ -56,13 +58,8 @@ class UpdatePersonActivity : AppCompatActivity() {
         val intentUserCity = intent.getStringExtra("userCity").toString()
         val intentUserCityId = intent.getIntExtra("userCityId", 1)
 
-        println("AAAAAAAAAAAAAAAAAAAAaa0  ${intent.extras}")
-        println("AAAAAAAAAAAAAAAAAAAAaa1  ${intentUserSexId}")
-        println("AAAAAAAAAAAAAAAAAAAAaa2  ${intentUserGroupId}")
-        println("AAAAAAAAAAAAAAAAAAAAaa3  ${intentUserCityId}")
-
         val userId: TextView = findViewById(R.id.updateUser_userId)
-        userId.text = intentUserId.toString()
+        userId.text = "id: $intentUserId"
 
         val userName: EditText = findViewById(R.id.updateUser_name)
         userName.setText(intentUserName)
@@ -73,6 +70,7 @@ class UpdatePersonActivity : AppCompatActivity() {
         this.initSpinner(userSexSpinner, userGroupSpinner, userCitySpinner, intentUserSex, intentUserGroup, intentUserCity)
 
         val updateButton: Button = findViewById(R.id.updateUser_updateButton)
+        val delButton: Button = findViewById(R.id.updateUser_deleteButton)
         val backButton: Button = findViewById(R.id.updateUser_backButton)
 
         backButton.setOnClickListener {
@@ -86,23 +84,29 @@ class UpdatePersonActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val userData_userId = ModelView().getAllUsers().size+1
+
             val userData_userName = userName.text.toString().trim()
             val userData_userSex = userSexSpinner.selectedItem.toString()
             val userData_userGroup = userGroupSpinner.selectedItem.toString()
             val userData_userCity = userCitySpinner.selectedItem.toString()
 
-
-            val user = User(userData_userId, userData_userName,
+            val user = User(intentUserId, userData_userName,
                 ModelView().getSexByName(userData_userSex),
                 ModelView().getGroupByName(userData_userGroup),
                 ModelView().getCityByName(userData_userCity))
 
-            ModelView().addUser(user)
+            ModelView().updateUser(user)
 
-            Toast.makeText(this, "Пользователь ${user.name} успешно добавлен",
+            Toast.makeText(this, "Пользователь ${user.name} успешно обновлён",
                 Toast.LENGTH_SHORT).show()
 
+            val intent = Intent(this, PersonsActivity::class.java)
+            startActivity(intent)
+        }
+
+        delButton.setOnClickListener {
+            ModelView().delUser(intentUserId)
+            Toast.makeText(this, "Пользователь ${intentUserName} успешно удалён!", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, PersonsActivity::class.java)
             startActivity(intent)
         }
