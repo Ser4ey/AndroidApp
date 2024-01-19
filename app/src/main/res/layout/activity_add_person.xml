@@ -6,6 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#B58910"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="40dp"
+
     tools:context=".AddPersonActivity">
 
 
@@ -13,19 +16,36 @@
         android:id="@+id/addUser_name"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="10dp"
-        android:ems="10"
+        android:textSize="20sp"
         android:hint="Имя"
+        android:layout_marginBottom="20dp"
         android:inputType="text" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/addUser_spinnerUserSex"
         android:layout_width="match_parent"
-        android:background="#9A7614"
-        android:scrollbarSize="30sp"
         android:layout_height="48dp"
-        android:layout_marginVertical="20dp"
+        android:background="#F4EACC"
+        android:layout_marginBottom="20dp"
+        android:popupBackground="#F4EACC"
+         />
+
+    <Spinner
+        android:id="@+id/addUser_spinnerUserGroup"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#F4EACC"
+        android:layout_marginBottom="20dp"
+        android:popupBackground="#F4EACC"
+        />
+
+    <Spinner
+        android:id="@+id/addUser_spinnerUserCity"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#F4EACC"
+        android:layout_marginBottom="20dp"
+        android:popupBackground="#F4EACC"
         />
 
     <Button
@@ -33,6 +53,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#0F5B6E"
         android:layout_width="200dp"
+        android:layout_marginBottom="20dp"
         android:text="Добавть" />
 
     <Button
