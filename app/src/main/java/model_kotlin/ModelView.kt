@@ -208,27 +208,27 @@ class ModelView(context: Context) {
 
     @SuppressLint("Range")
     fun getAllGroups(): List<user_group> {
-        return listOf(user_group(1, "Красные"),  user_group(2, "Белые"))
+//        return listOf(user_group(1, "Красные"),  user_group(2, "Белые"))
 
-//        val groups = mutableListOf<user_group>()
-//
-//        val query = "SELECT * FROM $TABLE_GROUP"
-//        val db = dbHelper.readableDatabase
-//        val cursor = db.rawQuery(query, null)
-//
-//        if (cursor.moveToFirst()) {
-//            do {
-//                val groupId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
-//                val groupName = cursor.getString(cursor.getColumnIndex(KEY_VALUE))
-//                val group = user_group(groupId, groupName)
-//                groups.add(group)
-//            } while (cursor.moveToNext())
-//        }
-//
-//        cursor.close()
-//        db.close()
-//
-//        return groups
+        val groups = mutableListOf<user_group>()
+
+        val query = "SELECT * FROM $TABLE_GROUP"
+        val db = dbHelper.readableDatabase
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val groupId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
+                val groupName = cursor.getString(cursor.getColumnIndex(KEY_VALUE))
+                val group = user_group(groupId, groupName)
+                groups.add(group)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+
+        return groups
     }
 
     @SuppressLint("Range")
@@ -255,27 +255,27 @@ class ModelView(context: Context) {
 
     @SuppressLint("Range")
     fun getAllCities(): List<user_city> {
-        return listOf(user_city(1, "Москва"),  user_city(2, "Питер"))
+//        return listOf(user_city(1, "Москва"),  user_city(2, "Питер"))
 
-//        val cities = mutableListOf<user_city>()
-//
-//        val query = "SELECT * FROM $TABLE_CITY"
-//        val db = dbHelper.readableDatabase
-//        val cursor = db.rawQuery(query, null)
-//
-//        if (cursor.moveToFirst()) {
-//            do {
-//                val cityId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
-//                val cityName = cursor.getString(cursor.getColumnIndex(KEY_VALUE))
-//                val city = user_city(cityId, cityName)
-//                cities.add(city)
-//            } while (cursor.moveToNext())
-//        }
-//
-//        cursor.close()
-//        db.close()
-//
-//        return cities
+        val cities = mutableListOf<user_city>()
+
+        val query = "SELECT * FROM $TABLE_CITY"
+        val db = dbHelper.readableDatabase
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val cityId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
+                val cityName = cursor.getString(cursor.getColumnIndex(KEY_VALUE))
+                val city = user_city(cityId, cityName)
+                cities.add(city)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+
+        return cities
     }
 
     @SuppressLint("Range")
@@ -302,27 +302,27 @@ class ModelView(context: Context) {
 
     @SuppressLint("Range")
     fun getAllSex(): List<user_sex> {
-        return listOf(user_sex(1, "М"),  user_sex(2, "Ж"))
+//        return listOf(user_sex(1, "М"),  user_sex(2, "Ж"))
 
-//        val sexes = mutableListOf<user_sex>()
-//
-//        val query = "SELECT * FROM $TABLE_SEX"
-//        val db = dbHelper.readableDatabase
-//        val cursor = db.rawQuery(query, null)
-//
-//        if (cursor.moveToFirst()) {
-//            do {
-//                val sexId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
-//                val sexValue = cursor.getString(cursor.getColumnIndex(KEY_VALUE))
-//                val sex = user_sex(sexId, sexValue)
-//                sexes.add(sex)
-//            } while (cursor.moveToNext())
-//        }
-//
-//        cursor.close()
-//        db.close()
-//
-//        return sexes
+        val sexes = mutableListOf<user_sex>()
+
+        val query = "SELECT * FROM $TABLE_SEX"
+        val db = dbHelper.readableDatabase
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val sexId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
+                val sexValue = cursor.getString(cursor.getColumnIndex(KEY_VALUE))
+                val sex = user_sex(sexId, sexValue)
+                sexes.add(sex)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+
+        return sexes
     }
 
     @SuppressLint("Range")
