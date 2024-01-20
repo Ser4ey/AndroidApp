@@ -164,9 +164,9 @@ class ModelView(context: Context) {
 //        values.put(KEY_ID, user.id)
 
         values.put(KEY_FULL_NAME, user.name)
-        values.put(KEY_SEX_ID, user.sex.id-1)
-        values.put(KEY_GROUP_ID, user.group.id-1)
-        values.put(KEY_CITY_ID, user.city.id-1)
+        values.put(KEY_SEX_ID, user.sex.id)
+        values.put(KEY_GROUP_ID, user.group.id)
+        values.put(KEY_CITY_ID, user.city.id)
 
         db.insert(TABLE_USERS_VIEW, null, values)
         db.close()
@@ -187,9 +187,9 @@ class ModelView(context: Context) {
         val db = dbHelper.writableDatabase
         val values = ContentValues()
         values.put(KEY_FULL_NAME, newUserData.name)
-        values.put(KEY_SEX_ID, newUserData.sex.id - 1)
-        values.put(KEY_GROUP_ID, newUserData.group.id - 1)
-        values.put(KEY_CITY_ID, newUserData.city.id - 1)
+        values.put(KEY_SEX_ID, newUserData.sex.id)
+        values.put(KEY_GROUP_ID, newUserData.group.id)
+        values.put(KEY_CITY_ID, newUserData.city.id)
 
         val whereClause = "$KEY_ID = ?"
         val whereArgs = arrayOf(newUserData.id.toString())
@@ -233,24 +233,24 @@ class ModelView(context: Context) {
 
     @SuppressLint("Range")
     fun getGroupByName(name: String): user_group {
-        if (name == "Красные") return user_group(1, "Красные")
-        return user_group(2, "Белые")
+//        if (name == "Красные") return user_group(1, "Красные")
+//        return user_group(2, "Белые")
 
-//        val db = dbHelper.readableDatabase
-//        val query = "SELECT * FROM $TABLE_GROUP WHERE $KEY_VALUE = ?"
-//        val cursor = db.rawQuery(query, arrayOf(name))
-//
-//        var group = user_group(0, "") // Значения по умолчанию, если не найдено
-//        if (cursor.moveToFirst()) {
-//            val groupId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
-//            val groupName = cursor.getString(cursor.getColumnIndex(KEY_VALUE))
-//            group = user_group(groupId, groupName)
-//        }
-//
-//        cursor.close()
-//        db.close()
-//
-//        return group
+        val db = dbHelper.readableDatabase
+        val query = "SELECT * FROM $TABLE_GROUP WHERE $KEY_VALUE = ?"
+        val cursor = db.rawQuery(query, arrayOf(name))
+
+        var group = user_group(0, "") // Значения по умолчанию, если не найдено
+        if (cursor.moveToFirst()) {
+            val groupId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
+            val groupName = cursor.getString(cursor.getColumnIndex(KEY_VALUE))
+            group = user_group(groupId, groupName)
+        }
+
+        cursor.close()
+        db.close()
+
+        return group
     }
 
     @SuppressLint("Range")
@@ -280,24 +280,24 @@ class ModelView(context: Context) {
 
     @SuppressLint("Range")
     fun getCityByName(name: String): user_city {
-        if (name == "Москва") return user_city(1, "Москва")
-        return user_city(2, "Питер")
+//        if (name == "Москва") return user_city(1, "Москва")
+//        return user_city(2, "Питер")
 
-//        val db = dbHelper.readableDatabase
-//        val query = "SELECT * FROM $TABLE_CITY WHERE $KEY_VALUE = ?"
-//        val cursor = db.rawQuery(query, arrayOf(name))
-//
-//        var city = user_city(0, "") // Значения по умолчанию, если не найдено
-//        if (cursor.moveToFirst()) {
-//            val cityId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
-//            val cityName = cursor.getString(cursor.getColumnIndex(KEY_VALUE))
-//            city = user_city(cityId, cityName)
-//        }
-//
-//        cursor.close()
-//        db.close()
-//
-//        return city
+        val db = dbHelper.readableDatabase
+        val query = "SELECT * FROM $TABLE_CITY WHERE $KEY_VALUE = ?"
+        val cursor = db.rawQuery(query, arrayOf(name))
+
+        var city = user_city(0, "") // Значения по умолчанию, если не найдено
+        if (cursor.moveToFirst()) {
+            val cityId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
+            val cityName = cursor.getString(cursor.getColumnIndex(KEY_VALUE))
+            city = user_city(cityId, cityName)
+        }
+
+        cursor.close()
+        db.close()
+
+        return city
     }
 
     @SuppressLint("Range")
@@ -327,23 +327,23 @@ class ModelView(context: Context) {
 
     @SuppressLint("Range")
     fun getSexByName(name: String): user_sex {
-        if (name == "М") return user_sex(1, "М")
-        return user_sex(2, "Ж")
+//        if (name == "М") return user_sex(1, "М")
+//        return user_sex(2, "Ж")
 
-//        val db = dbHelper.readableDatabase
-//        val query = "SELECT * FROM $TABLE_SEX WHERE $KEY_VALUE = ?"
-//        val cursor = db.rawQuery(query, arrayOf(name))
-//
-//        var sex = user_sex(0, "") // Значения по умолчанию, если не найдено
-//        if (cursor.moveToFirst()) {
-//            val sexId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
-//            val sexValue = cursor.getString(cursor.getColumnIndex(KEY_VALUE))
-//            sex = user_sex(sexId, sexValue)
-//        }
-//
-//        cursor.close()
-//        db.close()
-//
-//        return sex
+        val db = dbHelper.readableDatabase
+        val query = "SELECT * FROM $TABLE_SEX WHERE $KEY_VALUE = ?"
+        val cursor = db.rawQuery(query, arrayOf(name))
+
+        var sex = user_sex(0, "") // Значения по умолчанию, если не найдено
+        if (cursor.moveToFirst()) {
+            val sexId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
+            val sexValue = cursor.getString(cursor.getColumnIndex(KEY_VALUE))
+            sex = user_sex(sexId, sexValue)
+        }
+
+        cursor.close()
+        db.close()
+
+        return sex
     }
 }
