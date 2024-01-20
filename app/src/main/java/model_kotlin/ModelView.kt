@@ -29,56 +29,12 @@ class ModelView(context: Context) {
     private val KEY_CITY_ID = "city_id"
     private val KEY_VALUE = "value"
 
-//    init {
-
-
-//    override fun onCreate(db: SQLiteDatabase?) {
-//        val db = this.writableDatabase
-//        val query1 = "CREATE TABLE IF NOT EXISTS $TABLE_USERS_VIEW(" +
-//                "$KEY_ID INT PRIMARY KEY," +
-//                "$KEY_FULL_NAME TEXT," +
-//                "$KEY_SEX_ID INT," +
-//                "$KEY_GROUP_ID INT," +
-//                "$KEY_CITY_ID INT," +
-//                "FOREIGN KEY($KEY_SEX_ID) REFERENCES $TABLE_SEX($KEY_ID)," +
-//                "FOREIGN KEY($KEY_GROUP_ID) REFERENCES $TABLE_GROUP($KEY_ID)," +
-//                "FOREIGN KEY($KEY_CITY_ID) REFERENCES $TABLE_CITY($KEY_ID))"
-//        db.execSQL(query1)
-//
-//        val query2 = "CREATE TABLE IF NOT EXISTS $TABLE_SEX(" +
-//                "$KEY_ID INT PRIMARY KEY," +
-//                "$KEY_VALUE TEXT)"
-//        db.execSQL(query2)
-//
-//        val query3 = "CREATE TABLE IF NOT EXISTS $TABLE_GROUP(" +
-//                "$KEY_ID INT PRIMARY KEY," +
-//                "$KEY_VALUE TEXT)"
-//        db.execSQL(query3)
-//
-//        val query4 = "CREATE TABLE IF NOT EXISTS $TABLE_CITY(" +
-//                "$KEY_ID INT PRIMARY KEY," +
-//                "$KEY_VALUE TEXT)"
-//        db.execSQL(query4)
-//
-//        db.close()
-//
-//    }
-
-//    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-//        db.execSQL("DROP TABLE IF EXISTS table_users_view;")
-//        db.execSQL("DROP TABLE IF EXISTS table_sex;")
-//        db.execSQL("DROP TABLE IF EXISTS table_group;")
-//        db.execSQL("DROP TABLE IF EXISTS table_city;")
-//        onCreate(db)
-//    }
-
-
     @SuppressLint("Range")
     fun getAllUsers(): List<User> {
-    //        актуальный список всех пользователей
-    //        val user1 = User(1, "Oka1", user_sex(1, "М"), user_group(1, "White"), user_city(1, "Москва"))
-    //        val user2 = User(2, "Pols2", user_sex(1, "Ж"), user_group(1, "Red"), user_city(1, "Питер"))
-    //        return listOf(user1, user2)
+//            актуальный список всех пользователей
+//            val user1 = User(1, "Oka1", user_sex(1, "М"), user_group(1, "White"), user_city(1, "Москва"))
+//            val user2 = User(2, "Pols2", user_sex(1, "Ж"), user_group(1, "Red"), user_city(1, "Питер"))
+//            return users
 
         val users = mutableListOf<User>()
         val query = "SELECT * FROM $TABLE_USERS_VIEW"
@@ -129,45 +85,45 @@ class ModelView(context: Context) {
     @SuppressLint("Range")
     fun filterUser(byCity: List<user_city>, byGroup: List<user_group>, bySex: List<user_sex>): List<User>  {
     //        актуальный список всех пользователей, котрые удовлетворяют всем 3 фильтрам
-//    val filteredUsers = mutableListOf<User>()
+    val filteredUsers = mutableListOf<User>()
+
+    for (user in users){
+        if (user.city in byCity && user.group in byGroup && user.sex in bySex)
+            filteredUsers.add(user)
+    }
+    return filteredUsers
+
+//        val filteredUsers = mutableListOf<User>()
 //
-//    for (user in users){
-//        if (user.city in byCity && user.group in byGroup && user.sex in bySex)
-//            filteredUsers.add(user)
-//    }
-//    return filteredUsers
-
-        val filteredUsers = mutableListOf<User>()
-
-        val query = "SELECT * FROM $TABLE_USERS_VIEW " +
-                "WHERE $KEY_CITY_ID IN (${byCity.joinToString { it.id.toString() }}) " +
-                "AND $KEY_GROUP_ID IN (${byGroup.joinToString { it.id.toString() }}) " +
-                "AND $KEY_SEX_ID IN (${bySex.joinToString { it.id.toString() }})"
-
-        val db = dbHelper.readableDatabase
-        val cursor = db.rawQuery(query, null)
-
-        if (cursor.moveToFirst()) {
-            do {
-                val userId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
-                val fullName = cursor.getString(cursor.getColumnIndex(KEY_FULL_NAME))
-                val sexId = cursor.getInt(cursor.getColumnIndex(KEY_SEX_ID))
-                val groupId = cursor.getInt(cursor.getColumnIndex(KEY_GROUP_ID))
-                val cityId = cursor.getInt(cursor.getColumnIndex(KEY_CITY_ID))
-
-                val sex = user_sex(sexId, getValueById(TABLE_SEX, sexId))
-                val group = user_group(groupId, getValueById(TABLE_GROUP, groupId))
-                val city = user_city(cityId, getValueById(TABLE_CITY, cityId))
-
-                val user = User(userId, fullName, sex, group, city)
-                filteredUsers.add(user)
-            } while (cursor.moveToNext())
-        }
-
-        cursor.close()
-        db.close()
-
-        return filteredUsers
+//        val query = "SELECT * FROM $TABLE_USERS_VIEW " +
+//                "WHERE $KEY_CITY_ID IN (${byCity.joinToString { it.id.toString() }}) " +
+//                "AND $KEY_GROUP_ID IN (${byGroup.joinToString { it.id.toString() }}) " +
+//                "AND $KEY_SEX_ID IN (${bySex.joinToString { it.id.toString() }})"
+//
+//        val db = dbHelper.readableDatabase
+//        val cursor = db.rawQuery(query, null)
+//
+//        if (cursor.moveToFirst()) {
+//            do {
+//                val userId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
+//                val fullName = cursor.getString(cursor.getColumnIndex(KEY_FULL_NAME))
+//                val sexId = cursor.getInt(cursor.getColumnIndex(KEY_SEX_ID))
+//                val groupId = cursor.getInt(cursor.getColumnIndex(KEY_GROUP_ID))
+//                val cityId = cursor.getInt(cursor.getColumnIndex(KEY_CITY_ID))
+//
+//                val sex = user_sex(sexId, getValueById(TABLE_SEX, sexId))
+//                val group = user_group(groupId, getValueById(TABLE_GROUP, groupId))
+//                val city = user_city(cityId, getValueById(TABLE_CITY, cityId))
+//
+//                val user = User(userId, fullName, sex, group, city)
+//                filteredUsers.add(user)
+//            } while (cursor.moveToNext())
+//        }
+//
+//        cursor.close()
+//        db.close()
+//
+//        return filteredUsers
     }
 
     fun delUser(userId: Int): Boolean {
@@ -178,6 +134,8 @@ class ModelView(context: Context) {
 //            }
 //        }
 //        return false
+
+
         val db = dbHelper.writableDatabase
         val whereClause = "$KEY_ID = ?"
         val whereArgs = arrayOf(userId.toString())
@@ -202,181 +160,183 @@ class ModelView(context: Context) {
 
         val db = dbHelper.writableDatabase
         val values = ContentValues()
-        values.put(KEY_ID, user.id)
+
+//        values.put(KEY_ID, user.id)
+
         values.put(KEY_FULL_NAME, user.name)
-        values.put(KEY_SEX_ID, user.sex.id)
-        values.put(KEY_GROUP_ID, user.group.id)
-        values.put(KEY_CITY_ID, user.city.id)
+        values.put(KEY_SEX_ID, user.sex.id-1)
+        values.put(KEY_GROUP_ID, user.group.id-1)
+        values.put(KEY_CITY_ID, user.city.id-1)
 
         db.insert(TABLE_USERS_VIEW, null, values)
         db.close()
     }
 
     fun updateUser(newUserData: User): Boolean {
-//        for (i in users.indices) {
-//            if (users[i].id == newUserData.id) {
-//                users[i].name = newUserData.name
-//                users[i].sex = newUserData.sex
-//                users[i].group = newUserData.group
-//                users[i].city = newUserData.city
-//                return true
-//            }
-//        }
-//        return false
-        val db = dbHelper.writableDatabase
-        val values = ContentValues()
-        values.put(KEY_FULL_NAME, newUserData.name)
-        values.put(KEY_SEX_ID, newUserData.sex.id)
-        values.put(KEY_GROUP_ID, newUserData.group.id)
-        values.put(KEY_CITY_ID, newUserData.city.id)
-
-        val whereClause = "$KEY_ID = ?"
-        val whereArgs = arrayOf(newUserData.id.toString())
-
-        val result = db.update(TABLE_USERS_VIEW, values, whereClause, whereArgs) > 0
-
-        db.close()
-        return result
+        for (i in users.indices) {
+            if (users[i].id == newUserData.id) {
+                users[i].name = newUserData.name
+                users[i].sex = newUserData.sex
+                users[i].group = newUserData.group
+                users[i].city = newUserData.city
+                return true
+            }
+        }
+        return false
+//        val db = dbHelper.writableDatabase
+//        val values = ContentValues()
+//        values.put(KEY_FULL_NAME, newUserData.name)
+//        values.put(KEY_SEX_ID, newUserData.sex.id)
+//        values.put(KEY_GROUP_ID, newUserData.group.id)
+//        values.put(KEY_CITY_ID, newUserData.city.id)
+//
+//        val whereClause = "$KEY_ID = ?"
+//        val whereArgs = arrayOf(newUserData.id.toString())
+//
+//        val result = db.update(TABLE_USERS_VIEW, values, whereClause, whereArgs) > 0
+//
+//        db.close()
+//        return result
     }
 
     @SuppressLint("Range")
     fun getAllGroups(): List<user_group> {
-//        return listOf(user_group(1, "Красные"),  user_group(2, "Белые"))
+        return listOf(user_group(1, "Красные"),  user_group(2, "Белые"))
 
-        val groups = mutableListOf<user_group>()
-
-        val query = "SELECT * FROM $TABLE_GROUP"
-        val db = dbHelper.readableDatabase
-        val cursor = db.rawQuery(query, null)
-
-        if (cursor.moveToFirst()) {
-            do {
-                val groupId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
-                val groupName = cursor.getString(cursor.getColumnIndex(KEY_VALUE))
-                val group = user_group(groupId, groupName)
-                groups.add(group)
-            } while (cursor.moveToNext())
-        }
-
-        cursor.close()
-        db.close()
-
-        return groups
+//        val groups = mutableListOf<user_group>()
+//
+//        val query = "SELECT * FROM $TABLE_GROUP"
+//        val db = dbHelper.readableDatabase
+//        val cursor = db.rawQuery(query, null)
+//
+//        if (cursor.moveToFirst()) {
+//            do {
+//                val groupId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
+//                val groupName = cursor.getString(cursor.getColumnIndex(KEY_VALUE))
+//                val group = user_group(groupId, groupName)
+//                groups.add(group)
+//            } while (cursor.moveToNext())
+//        }
+//
+//        cursor.close()
+//        db.close()
+//
+//        return groups
     }
 
     @SuppressLint("Range")
     fun getGroupByName(name: String): user_group {
-//        if (name == "Красные") return user_group(1, "Красные")
-//        return user_group(2, "Белые")
+        if (name == "Красные") return user_group(1, "Красные")
+        return user_group(2, "Белые")
 
-        val db = dbHelper.readableDatabase
-        val query = "SELECT * FROM $TABLE_GROUP WHERE $KEY_VALUE = ?"
-        val cursor = db.rawQuery(query, arrayOf(name))
-
-        var group = user_group(0, "") // Значения по умолчанию, если не найдено
-        if (cursor.moveToFirst()) {
-            val groupId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
-            val groupName = cursor.getString(cursor.getColumnIndex(KEY_VALUE))
-            group = user_group(groupId, groupName)
-        }
-
-        cursor.close()
-        db.close()
-
-        return group
+//        val db = dbHelper.readableDatabase
+//        val query = "SELECT * FROM $TABLE_GROUP WHERE $KEY_VALUE = ?"
+//        val cursor = db.rawQuery(query, arrayOf(name))
+//
+//        var group = user_group(0, "") // Значения по умолчанию, если не найдено
+//        if (cursor.moveToFirst()) {
+//            val groupId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
+//            val groupName = cursor.getString(cursor.getColumnIndex(KEY_VALUE))
+//            group = user_group(groupId, groupName)
+//        }
+//
+//        cursor.close()
+//        db.close()
+//
+//        return group
     }
 
     @SuppressLint("Range")
     fun getAllCities(): List<user_city> {
-//        return listOf(user_city(1, "Москва"),  user_city(2, "Питер"))
+        return listOf(user_city(1, "Москва"),  user_city(2, "Питер"))
 
-        val cities = mutableListOf<user_city>()
-
-        val query = "SELECT * FROM $TABLE_CITY"
-        val db = dbHelper.readableDatabase
-        val cursor = db.rawQuery(query, null)
-
-        if (cursor.moveToFirst()) {
-            do {
-                val cityId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
-                val cityName = cursor.getString(cursor.getColumnIndex(KEY_VALUE))
-                val city = user_city(cityId, cityName)
-                cities.add(city)
-            } while (cursor.moveToNext())
-        }
-
-        cursor.close()
-        db.close()
-
-        return cities
+//        val cities = mutableListOf<user_city>()
+//
+//        val query = "SELECT * FROM $TABLE_CITY"
+//        val db = dbHelper.readableDatabase
+//        val cursor = db.rawQuery(query, null)
+//
+//        if (cursor.moveToFirst()) {
+//            do {
+//                val cityId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
+//                val cityName = cursor.getString(cursor.getColumnIndex(KEY_VALUE))
+//                val city = user_city(cityId, cityName)
+//                cities.add(city)
+//            } while (cursor.moveToNext())
+//        }
+//
+//        cursor.close()
+//        db.close()
+//
+//        return cities
     }
 
     @SuppressLint("Range")
     fun getCityByName(name: String): user_city {
-//        if (name == "Москва") return user_city(1, "Москва")
-//        return user_city(2, "Питер")
+        if (name == "Москва") return user_city(1, "Москва")
+        return user_city(2, "Питер")
 
-        val db = dbHelper.readableDatabase
-        val query = "SELECT * FROM $TABLE_CITY WHERE $KEY_VALUE = ?"
-        val cursor = db.rawQuery(query, arrayOf(name))
-
-        var city = user_city(0, "") // Значения по умолчанию, если не найдено
-        if (cursor.moveToFirst()) {
-            val cityId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
-            val cityName = cursor.getString(cursor.getColumnIndex(KEY_VALUE))
-            city = user_city(cityId, cityName)
-        }
-
-        cursor.close()
-        db.close()
-
-        return city
+//        val db = dbHelper.readableDatabase
+//        val query = "SELECT * FROM $TABLE_CITY WHERE $KEY_VALUE = ?"
+//        val cursor = db.rawQuery(query, arrayOf(name))
+//
+//        var city = user_city(0, "") // Значения по умолчанию, если не найдено
+//        if (cursor.moveToFirst()) {
+//            val cityId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
+//            val cityName = cursor.getString(cursor.getColumnIndex(KEY_VALUE))
+//            city = user_city(cityId, cityName)
+//        }
+//
+//        cursor.close()
+//        db.close()
+//
+//        return city
     }
 
     @SuppressLint("Range")
     fun getAllSex(): List<user_sex> {
-//        return listOf(user_sex(1, "М"),  user_sex(2, "Ж"))
+        return listOf(user_sex(1, "М"),  user_sex(2, "Ж"))
 
-        val sexes = mutableListOf<user_sex>()
-
-        val query = "SELECT * FROM $TABLE_SEX"
-        val db = dbHelper.readableDatabase
-        val cursor = db.rawQuery(query, null)
-
-        if (cursor.moveToFirst()) {
-            do {
-                val sexId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
-                val sexValue = cursor.getString(cursor.getColumnIndex(KEY_VALUE))
-                val sex = user_sex(sexId, sexValue)
-                sexes.add(sex)
-            } while (cursor.moveToNext())
-        }
-
-        cursor.close()
-        db.close()
-
-        return sexes
+//        val sexes = mutableListOf<user_sex>()
+//
+//        val query = "SELECT * FROM $TABLE_SEX"
+//        val db = dbHelper.readableDatabase
+//        val cursor = db.rawQuery(query, null)
+//
+//        if (cursor.moveToFirst()) {
+//            do {
+//                val sexId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
+//                val sexValue = cursor.getString(cursor.getColumnIndex(KEY_VALUE))
+//                val sex = user_sex(sexId, sexValue)
+//                sexes.add(sex)
+//            } while (cursor.moveToNext())
+//        }
+//
+//        cursor.close()
+//        db.close()
+//
+//        return sexes
     }
 
     @SuppressLint("Range")
     fun getSexByName(name: String): user_sex {
-//        if (name == "М") return user_sex(1, "М")
-//        return user_sex(2, "Ж")
+        if (name == "М") return user_sex(1, "М")
+        return user_sex(2, "Ж")
 
-        val db = dbHelper.readableDatabase
-        val query = "SELECT * FROM $TABLE_SEX WHERE $KEY_VALUE = ?"
-        val cursor = db.rawQuery(query, arrayOf(name))
-
-        var sex = user_sex(0, "") // Значения по умолчанию, если не найдено
-        if (cursor.moveToFirst()) {
-            val sexId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
-            val sexValue = cursor.getString(cursor.getColumnIndex(KEY_VALUE))
-            sex = user_sex(sexId, sexValue)
-        }
-
-        cursor.close()
-        db.close()
-
-        return sex
+//        val db = dbHelper.readableDatabase
+//        val query = "SELECT * FROM $TABLE_SEX WHERE $KEY_VALUE = ?"
+//        val cursor = db.rawQuery(query, arrayOf(name))
+//
+//        var sex = user_sex(0, "") // Значения по умолчанию, если не найдено
+//        if (cursor.moveToFirst()) {
+//            val sexId = cursor.getInt(cursor.getColumnIndex(KEY_ID))
+//            val sexValue = cursor.getString(cursor.getColumnIndex(KEY_VALUE))
+//            sex = user_sex(sexId, sexValue)
+//        }
+//
+//        cursor.close()
+//        db.close()
+//
+//        return sex
     }
 }
