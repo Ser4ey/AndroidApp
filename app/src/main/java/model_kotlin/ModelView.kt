@@ -173,30 +173,37 @@ class ModelView(context: Context) {
     }
 
     fun updateUser(newUserData: User): Boolean {
-        for (i in users.indices) {
-            if (users[i].id == newUserData.id) {
-                users[i].name = newUserData.name
-                users[i].sex = newUserData.sex
-                users[i].group = newUserData.group
-                users[i].city = newUserData.city
-                return true
-            }
+//        for (i in users.indices) {
+//            if (users[i].id == newUserData.id) {
+//                users[i].name = newUserData.name
+//                users[i].sex = newUserData.sex
+//                users[i].group = newUserData.group
+//                users[i].city = newUserData.city
+//                return true
+//            }
+//        }
+//        return false
+
+        val db = dbHelper.writableDatabase
+        val values = ContentValues()
+        values.put(KEY_FULL_NAME, newUserData.name)
+        values.put(KEY_SEX_ID, newUserData.sex.id - 1)
+        values.put(KEY_GROUP_ID, newUserData.group.id - 1)
+        values.put(KEY_CITY_ID, newUserData.city.id - 1)
+
+        val whereClause = "$KEY_ID = ?"
+        val whereArgs = arrayOf(newUserData.id.toString())
+
+        try {
+            val result = db.update(TABLE_USERS_VIEW, values, whereClause, whereArgs)
+            db.close()
+            return result > 0
+        } catch (e: Exception) {
+            // Логирование ошибки
+            e.printStackTrace()
+            db.close()
+            return false
         }
-        return false
-//        val db = dbHelper.writableDatabase
-//        val values = ContentValues()
-//        values.put(KEY_FULL_NAME, newUserData.name)
-//        values.put(KEY_SEX_ID, newUserData.sex.id)
-//        values.put(KEY_GROUP_ID, newUserData.group.id)
-//        values.put(KEY_CITY_ID, newUserData.city.id)
-//
-//        val whereClause = "$KEY_ID = ?"
-//        val whereArgs = arrayOf(newUserData.id.toString())
-//
-//        val result = db.update(TABLE_USERS_VIEW, values, whereClause, whereArgs) > 0
-//
-//        db.close()
-//        return result
     }
 
     @SuppressLint("Range")
