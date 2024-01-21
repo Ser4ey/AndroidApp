@@ -135,7 +135,7 @@ import model_kotlin.User
 import model_kotlin.user_city
 import model_kotlin.user_group
 import model_kotlin.user_sex
-import model_kotlin.users
+//import model_kotlin.users
 
 class PersonsActivity : AppCompatActivity() {
     var currentPersons: List<User> = emptyList()
